@@ -1,0 +1,25 @@
+{% extends 'base_report.html' %}
+
+{% block title %}Weekly Sales Report{% endblock %}
+{% block header %}Weekly Sales Report{% endblock %}
+{% block content %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Sales</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week_data in sales_data %}
+                    <tr>
+                        <td>{{ week_data.start_date}}</td>
+                        <td>{{ week_data.end_date}}</td>
+                        <td>Rs{{ week_data.total_sales}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
+

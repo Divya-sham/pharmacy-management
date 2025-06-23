@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f0fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .invoice-container {
+            background-color: #ffffff;
+            margin-top: 20px;
+            border-radius: 12px;
+            width: 90%;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        tbody tr:nth-child(even){
+            background-color: #f9f9f9;
+        }
+
+        .total {
+            font-weight: bold;
+            background-color: #e3f2fd;
+        }
+
+        tfoot td{
+            text-align: right;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+        <h1>Invoice</h1>
+        <div class="customer-details">
+            <p><strong>Customer Name:</strong> {{ customer_name }}</p>
+            <p><strong>Phone:</strong> {{ phone_number }}</p>
+            <p><strong>Doctor Name:</strong> {{ doctor_name }}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Original Price</th>
+                    <th>Discounted Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sold_items %}
+                    <tr>
+                        <td>{{ item['name'] }}</td>
+                        <td>{{ item['quantity'] }}</td>
+                        <td>Rs{{ item['original_price'] }}</td>
+                        <td>
+                            {% if item['original_price'] == item['discounted_price'] %}
+                                -
+                            {% else %}
+                                Rs{{ item['discounted_price'] }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item['discounted_price']%}
+                                Rs{{ item['discounted_price'] }}
+                            {% else %}
+                                Rs{{ item['original_price'] }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr class="total">
+                    <td colspan="4">Total Amount:</td>
+                    <td>Rs{{ total_amount }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: center;">
+                        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Home</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+
+</html>
+

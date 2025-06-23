@@ -1,0 +1,23 @@
+{% extends 'base_report.html' %}
+
+{% block title %}Monthly Sales Report{% endblock %}
+{% block header %}Monthly Sales Report{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Total Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month_data in sales_data %}
+                <tr>
+                    <td>{{ month_data.month}}</td>
+                    <td>Rs{{ month_data.total_sales}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

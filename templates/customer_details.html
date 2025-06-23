@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy System - Customer Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9f0f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container{
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color:#333;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+    
+</head>
+<script>
+    function validateForm(){
+        const name = document.getElementById("customer_name").value.trim();
+        const phone = document.getElementById("phone_number").value.trim();
+        const doctor = document.getElementById("doctor_name").value.trim();
+        const phonePattern = /^[6-9]\d{9}$/;
+
+        if (name === ""){
+            alert("Please enter the customer's name.");
+            return false;
+        }
+
+        if (!phonePattern.test(phone)){
+            alert("Enter a valid 10 digit phone number starting with 6, 7, 8 or 9.");
+            return false;
+        }
+
+        if(doctor === ""){
+            alert("Please enter the doctor's name.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<body>
+    <div class="form-container">
+    <img src="static/custdet.avif" alt="Pharmacy" style="display: block; margin:0;height: 300px;">
+    <h1>Customer Details</h1>
+    <form method="post" action="{{ url_for('customer_details') }}" onsubmit="return validateForm()">
+        <label for="customer_name">Customer Name:</label>
+        <input type="text" id="customer_name" name="customer_name">
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number">
+
+        <label for="doctor_name">Doctor Name:</label>
+        <input type="text" id="doctor_name" name="doctor_name">
+
+        <button type="submit">Next</button>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Medicine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 0;
+            background: linear-gradient(rgba(255,255,255,0.6),rgba(255,255,255,0.6)), url('{{ url_for("static", filename="stock.jpeg") }}') no-repeat fixed;
+            background-size: cover;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #1976d2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Medicine</h2>
+    <form method="post">
+        <label>Name:</label>
+        <input type="text" name="name" value="{{medicine.name}}" required>
+
+        <label>Stock:</label>
+        <input type="number" name="stock" value="{{medicine.stock}}" required>
+
+        <label>Price:</label>
+        <input type="number" name="price" value="{{medicine.price}}" required>
+
+        <label>Expiration Date:</label>
+        <input type="date" name="expiration_date" value="{{medicine.expiration_date}}" required>
+
+        <label>Category:</label>
+        <input type="text" name="category" value="{{medicine.category}}" required>
+
+        <button type="submit">Update</button>
+        
+    </form>
+</body>
+</html>

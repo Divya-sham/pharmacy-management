@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintain Stock</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f8fb;
+            padding: 20px;
+            font-family: 'Segoe UI';
+            background: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('static/stock.jpeg') no-repeat fixed;
+            background-size: cover;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+
+        .alert-container {
+            margin-top: 20px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .table thead th{
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            border: none;
+        }
+
+        .table-container{
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container table-container">
+        <h2>Maintain Stock</h2>
+
+        <!-- Display Alerts -->
+        <div class="alert-container">
+            {% if alerts %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Expiry Alerts:</strong>
+                        <ul class="mb-0">
+                            {% for alert in alerts %}
+                                <li>{{ alert }}</li>
+                            {% endfor %}
+                        </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Filter Form -->
+        <form class="form-inline justify-content-center mb-4">
+            <label class="mr-2">Filter Medicine:</label>
+            <input type="text" class="form-control mr-2" id="medicineFilter" placeholder="Enter medicine name">
+            <button type="button" class="btn btn-primary" onclick="filterMedicine()">🔍Filter</button>
+        </form>
+
+        <!-- Medicine Table -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Stock</th>
+                    <th>Expiration Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicine in medicines_details %}
+                    <tr>
+                        <td>{{ medicine.name }}</td>
+                        <td>{{ medicine.stock }}</td>
+                        <td>{{ medicine.expiration_date }}</td>
+                        <td>
+                            <a href="{{url_for('edit_medicine',medicine_id=medicine.id)}}" class="btn btn-sm btn-outline-primary">
+                                Edit
+                            </a>
+                            <form action="{{url_for('delete_medicine',medicine_id=medicine.id)}}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterMedicine() {
+            var filterText = document.getElementById('medicineFilter').value.toUpperCase();
+            var table = document.querySelector('table');
+            var rows = table.querySelectorAll('tbody tr');
+
+            rows.forEach(function(row) {
+                var name = row.cells[0].textContent.toUpperCase();
+                if (name.indexOf(filterText) > -1) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

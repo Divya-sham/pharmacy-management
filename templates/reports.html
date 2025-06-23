@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('static/report.jpg') no-repeat;
+            background-attachment: fixed;
+        }
+        .overlay-box{
+            background: rgba(255,255,255,0.95);
+            margin: 60px auto;
+            max-width: 600px;
+            border-radius: 16px;
+        }
+
+        h1{
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .report-item{
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 20px;
+            color: #000;
+            background: rgba(255,255,255,0.6);
+        }
+
+        .report-item:hover{
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+        .report-text{
+            display: flex;
+            flex-direction: column;
+        }
+        .report-title{
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .arrow-icon{
+            font-size: 20px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-box">
+        <h1>Pharmacy Reports</h1>
+        <a class="report-item" href="{{url_for('daily_report')}}">
+            <div class="report-text">
+                <div class="report-title">Daily Report</div>
+                <div class="report-desc">Summary of today's pharmacy transactions</div>
+            </div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+        </a>
+        <a class="report-item" href="{{url_for('weekly_report')}}">
+            <div class="report-text">
+                <div class="report-title">Weekly Report</div>
+                <div class="report-desc">Summary of weekly sales and stocks</div>
+            </div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+        </a>
+        <a class="report-item" href="{{url_for('monthly_report')}}">
+            <div class="report-text">
+                <div class="report-title">Monthly Report</div>
+                <div class="report-desc">Detailed analytics for the month</div>
+            </div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+        </a>
+        <a class="report-item" href="{{url_for('annual_report')}}">
+            <div class="report-text">
+                <div class="report-title">Annual Report</div>
+                <div class="report-desc">Complete report for the financial year</div>
+            </div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+        </a>
+    </div>
+
+</body>
+</html>
